@@ -157,19 +157,16 @@ function getLoc(locName) {
             $('body').append(data);
             createMap(parseFloat(response[0][1]), parseFloat(response[0][2]));
            }, 2000); 
-        },
-        error: function(msg) {
-            console.log(msg);
-            $('body').html('').append('<span>Data unavailable at the moment. Please try again later.</span>');
         }
     });
 
 }//end of getLoc()
 
-function test(){
-    console.log("Loaded");
-}
-
+/**
+ * Creates Map for specified location
+ * @param {*} latitude 
+ * @param {*} longitude 
+ */
 function createMap(latitude, longitude) {
     console.log(latitude + ' ' + longitude);
     let coords = new google.maps.LatLng(latitude, longitude);
@@ -250,23 +247,3 @@ function getNearbySpots() {
 function upload(event) {
     let input = event.target.files;
 }
-
-  /*   let token = Math.random().toString(36).substr(2,8);
-
-    $.ajax({
-        method: "POST",
-        cache: false,
-        async: true,
-        url: "",
-        data: token,
-        beforeSend: function(){
-
-        },
-        success: function(response){
-
-        },
-        error: function(message){
-
-        }
-    });
-}//end of sendToken() */

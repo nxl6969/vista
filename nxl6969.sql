@@ -50,6 +50,10 @@ CREATE TABLE `location` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 SELECT * FROM location;
+
+DESCRIBE location;
+
+
 --
 -- Dumping data for table `location`
 --
@@ -59,7 +63,8 @@ INSERT INTO `location` (`location_id`, `name`, `lat`, `lng`, `description`, `tag
 (2, 'Boninovo', '42.6458845', '18.0966753', 'Boninovo is very beautiful lorem ipsum bepis bepis', 'Beautiful Cliff');
 
 -- --------------------------------------------------------
-
+INSERT INTO nxl6969.image (user_id, image_path, location) VALUES (3, 'lovrijenac.jpg', 1);
+INSERT INTO nxl6969.image (user_id, image_path, location) VALUES (3, 'lovrijenac2.jpg', 1);
 --
 -- Table structure for table `user`
 --
