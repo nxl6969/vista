@@ -1,0 +1,97 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Roboto', sans-serif;
+    color: white;
+}
+
+#welcome-page {
+    min-width: 100%;
+    min-height: 100vh;
+    background-image: linear-gradient(rgba(0,0,0, .7), rgba(0,0,0, .7)), url("../images/hero-img.jpg");
+    background-attachment: fixed;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+#welcome-msg {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.text-muted {
+    color: white !important;
+}
+
+#cont-btn {
+    position: absolute;
+    top: 85%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    min-width: 100px;
+    text-align: center;
+}
+
+#cont-btn a {
+    width: 100%;
+    height: 60px;
+    color: white;
+    font-size: 1.2rem;
+}
+
+.btn-primary, .btn-primary:hover {
+    background-color: #f381a7;
+    border: 1px #f381a7;
+    height: 44px;
+    font-weight: 400;
+    font-size: 1.2em;
+}
+
+.btn-primary:not(:disabled):not(.disabled):active {
+    background-color: transparent;
+    border: 1px solid #f381a7;
+}
+
+#btn-continue:hover {
+    border: 1px #bbb;
+    background: black;
+    color: white;
+}
+
+#content {
+    background: #f381a7;
+    max-width:100%;
+    min-height: 100vh;
+}
+
+#quote {
+    font-family: 'Bad Script', cursive;
+    font-size: 1.5em;
+}
+
+.demo-card-square.mdl-card {
+    width: 320px;
+    height: 300px;
+  }
+.demo-card-square > .mdl-card__title {
+    color: #fff;
+    background: url('../images/lovrijenac.jpg') bottom right 15% no-repeat #46B6AC;
+    background-size: cover;
+}
+
+input {
+
+}
+
+/* .show {
+    border: 1px solid red;
+} */
+
+div {
+    box-sizing: border-box;
+}
