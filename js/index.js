@@ -6,6 +6,7 @@ $(document).on('click', 'a[href^="#"]', function (event) {
     }, 500);
 });
 
+
 /** 
  * Sends token to the server side script
  * To be inserted into DB
@@ -104,25 +105,86 @@ function getLoc(locName) {
         data: { locName: locName },
         dataType: "JSON",
         beforeSend: function() {
-           /*  $('body').empty().fadeOut(5000, function(){
-                $('body').css('background-color', 'black').hide();
-            }); */
-            //$('#everything').fadeOut(2000);
             $("html, body").animate({ scrollTop: 0 }, "slow");
             $('body').children().not('.spinner').fadeOut(1500);
             $('.spinner').append('<i id="spinner" class="fa fa-circle-o-notch fa-spin" style="font-size:32px"></i>');
         },
         success: function(response) {
+            setTimeout(function () {
+                $('body').empty();
+            } , 2000);
             console.log(response);
-            let data = '';
+           let data = '';
+
+           data = '<div id="location-title">' +
+                        '<div class="col-12 pt-2 show">' +
+                            '<span class="location-title pl-3">' + locName + '</span>' +
+                        '</div>' +
+                    '</div>' +
+                    '<div id="location-content" class="container-fluid d-flex align-items-center mt-3">' + 
+                        '<div class="d-flex flex-column show">' +
+                            '<div class="d-flex flex-row mt-2">' +
+                                '<div id="desc-title" class="col-12 pb-2">' +
+                                    '<span class="description-title">Description:</span><br>' +
+                                '</div>' +
+                            '</div>' +
+                            '<div class="d-flex flex-row mt-3">' +
+                                '<div class="col-12">' +
+                                    '<span class="description">' + response[0][3] + '</span>' +
+                                '</div>' +
+                            '</div>' +
+                            '<div class="d-flex flex-row mt-2">' +
+                                '<div id="loc-location" class="col-12 pb-2">' +
+                                    '<span class="description-title">Location:</span><br>' +
+                                '</div>' +
+                            '</div>' +
+                            '<div class="d-flex flex-row mt-3">' +
+                                '<div class="col-12">' +
+                                    '<div id="map"></div>' +
+                                '</div>' +
+                            '</div>' +
+                        '</div>' +
+                    '</div>';
+
             if(response.length === 0) {
                 data += '<span>No images found. Please try again later.</span>';
             }
+            else {
+               data += '';
+            }
+
+           setTimeout(function() {
+            $('body').append(data);
+            createMap(parseFloat(response[0][1]), parseFloat(response[0][2]));
+           }, 2000); 
+        },
+        error: function(msg) {
+            console.log(msg);
+            $('body').html('').append('<span>Data unavailable at the moment. Please try again later.</span>');
         }
     });
 
 }//end of getLoc()
 
+function test(){
+    console.log("Loaded");
+}
+
+function createMap(latitude, longitude) {
+    console.log(latitude + ' ' + longitude);
+    let coords = new google.maps.LatLng(latitude, longitude);
+
+    let map = new google.maps.Map(document.getElementById('map'), {
+        zoom: 15,
+        center: coords
+    });
+
+    let marker = new google.maps.Marker({
+        position: coords,
+        map: map
+    });
+
+}//end of createMap()
 /* function getLocationInfo(location) {
 
     var lat;

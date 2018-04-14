@@ -55,7 +55,7 @@ SELECT * FROM location;
 --
 
 INSERT INTO `location` (`location_id`, `name`, `lat`, `lng`, `description`, `tags`) VALUES
-(1, 'Lovrijenac', '42.6409161', '18.103622', 'The monumental fortress, called the Gibraltar of Dubrovnik, rises 37 meters above sea level, and through its history has had many roles. The primary reason for its construction was a defensive nature, with main goal of protecting freedom of Dubrovnik', 'Historical fortress'),
+(1, 'Lovrijenac', '42.640994', '18.1035427', 'The monumental fortress, called the Gibraltar of Dubrovnik, rises 37 meters above sea level, and through its history has had many roles. The primary reason for its construction was a defensive nature, with main goal of protecting freedom of Dubrovnik', 'Historical fortress'),
 (2, 'Boninovo', '42.6458845', '18.0966753', 'Boninovo is very beautiful lorem ipsum bepis bepis', 'Beautiful Cliff');
 
 -- --------------------------------------------------------
