@@ -47,6 +47,9 @@ function createToken() {
     });
 } */
 
+/**
+ * Retrieves all locations that have the device 
+ */
 function getAllSpots() {
 
     $('#cards').empty();
@@ -75,7 +78,7 @@ function getAllSpots() {
                             '</div>' +
                             '<div class="mdl-card__supporting-text ml-2">' + response[i][4] + '</div>' +
                             '<div class="mdl-card__actions mdl-card--border">' +
-                                '<a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" onclick="getLoc(' + response[i][0].toLowerCase() + ')">View More' +
+                                '<a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" onclick="getLoc(\'' + response[i][0] + '\')">View More' +
                                 '</a>' +
                             '</div>' +
                         '</div>';
@@ -89,22 +92,36 @@ function getAllSpots() {
             }
         }
     });
-}
+
+}//end of getAllSpots()
 
 function getLoc(locName) {
-
     $.ajax({
+        method: "POST",
         url: 'datatest.php',
         async: true,
         cache: false,
-        data: locName,
+        data: { locName: locName },
         dataType: "JSON",
+        beforeSend: function() {
+           /*  $('body').empty().fadeOut(5000, function(){
+                $('body').css('background-color', 'black').hide();
+            }); */
+            //$('#everything').fadeOut(2000);
+            $("html, body").animate({ scrollTop: 0 }, "slow");
+            $('body').children().not('.spinner').fadeOut(1500);
+            $('.spinner').append('<i id="spinner" class="fa fa-circle-o-notch fa-spin" style="font-size:32px"></i>');
+        },
         success: function(response) {
             console.log(response);
+            let data = '';
+            if(response.length === 0) {
+                data += '<span>No images found. Please try again later.</span>';
+            }
         }
     });
 
-}
+}//end of getLoc()
 
 /* function getLocationInfo(location) {
 

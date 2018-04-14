@@ -9,46 +9,52 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="assets/css/style.css">
 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Bad+Script" rel="stylesheet">    
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
     <title>Document</title>
 </head>
+
 <body>
-
-    <div id="welcome-page">
-        <div class="mdl-grid">
-            <div id="welcome-msg" class="d-flex flex-column text-center">
-                <p id="welcome-title" class="display-2">Vista</p>
-                <span id="insp-msg" class="text-muted">Inspirational Message</span>
+    <div class="spinner d-flex align-items-center"></div>
+    <div id="top"></div>
+    <div id="everything">
+        <div id="welcome-page">
+            <div class="mdl-grid">
+                <div id="welcome-msg" class="d-flex flex-column text-center">
+                    <p id="welcome-title" class="display-2">Vista</p>
+                    <span id="insp-msg" class="text-muted">Inspirational Message</span>
+                </div>
+            </div>
+            <div id="cont-btn" class="container-fluid d-flex flex-row">
+                <div class="col-3 show"></div>
+                <div class="col-6 show">
+                    <a href="#content">
+                        <input type="button" class="btn btn-primary w-100" value="Start">
+                    </a>
+                </div>
+                <div class="col-3 show"></div>
             </div>
         </div>
-        <div id="cont-btn" class="container-fluid d-flex flex-row">
-            <div class="col-3 show"></div>
-            <div class="col-6 show">
-                <a href="#content">
-                    <input type="button" class="btn btn-primary w-100" value="Start">
-                </a>
+
+        <div id="content">
+            <div class="container-fluid show">
+                <div class="d-flex flex-row show">
+                    <div id="quote" class="col-12 mt-5 text-center">"Lorem Ipsum quote"</div>
+                </div>
+                <br>
+                <div id="cards" class="d-flex flex-column show mt-2 align-items-center">
+                    
+                </div>
+                <br>
+                <div id="map"></div>
             </div>
-            <div class="col-3 show"></div>
         </div>
     </div>
-
-    <div id="content">
-        <div class="container-fluid show">
-            <div class="d-flex flex-row show">
-                <div id="quote" class="col-12 mt-5 text-center">"Lorem Ipsum quote"</div>
-            </div>
-            <br>
-            <div id="cards" class="d-flex flex-column show mt-2 align-items-center">
-                
-            </div>
-            <br>
-            <div id="map"></div>
-        </div>
+    <div class="spinner">
     </div>
-
     <script src="https://cdn.jsdelivr.net/npm/js-cookie@2/src/js.cookie.min.js"></script>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBbGpevzk5Ip5vozwZk2PWNJLjT-ePmsCo" async defer></script>
     <script src="js/index.js"></script>

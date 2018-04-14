@@ -80,7 +80,7 @@ if(isset($_POST['locName'])){
     $mysqli = db_connect();
     $locName = $_POST['locName'];
 
-    $sql = "SELECT image.image_path, location.lat, location.lng FROM image LEFT JOIN location ON image.location = location.location_id WHERE image.location = ?;";
+    $sql = "SELECT image.image_path, location.lat, location.lng FROM image LEFT JOIN location ON image.location = location.location_id WHERE location.name = ?";
 
     if($stmt = $mysqli->prepare($sql)) {
 
@@ -99,6 +99,7 @@ if(isset($_POST['locName'])){
 
             echo json_encode($result);
         }
+    
     }
 
 }
