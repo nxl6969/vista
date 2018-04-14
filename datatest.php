@@ -34,7 +34,7 @@ if(isset($_POST['locations'])){
 
     $mysqli = db_connect();
 
-    $sql = "SELECT name, lat, lng, description FROM location";
+    $sql = "SELECT name, lat, lng, description, tags FROM location";
 
     if($stmt = $mysqli->prepare($sql)){
 
@@ -42,11 +42,11 @@ if(isset($_POST['locations'])){
 
             $stmt->store_result();
 
-            $stmt->bind_result($name, $lat, $long, $desc);
+            $stmt->bind_result($name, $lat, $long, $desc, $tags);
             $result = [];
 
             while($stmt->fetch()){
-                array_push($result, array($name, $lat, $long, $desc));
+                array_push($result, array($name, $lat, $long, $desc, $tags));
             }
 
             echo json_encode($result);

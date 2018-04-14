@@ -45,8 +45,8 @@ body {
 }
 
 .btn-primary, .btn-primary:hover {
-    background-color: #f381a7;
-    border: 1px #f381a7;
+    background-color: #2d5986;
+    border: 1px #2d5986;
     height: 44px;
     font-weight: 400;
     font-size: 1.2em;
@@ -54,7 +54,7 @@ body {
 
 .btn-primary:not(:disabled):not(.disabled):active {
     background-color: transparent;
-    border: 1px solid #f381a7;
+    border: 1px solid #2d5986;
 }
 
 #btn-continue:hover {
@@ -64,7 +64,7 @@ body {
 }
 
 #content {
-    background: #f381a7;
+    background: #2d5986;
     max-width:100%;
     min-height: 100vh;
 }
@@ -80,8 +80,11 @@ body {
   }
 .demo-card-square > .mdl-card__title {
     color: #fff;
-    background: url('../images/lovrijenac.jpg') bottom right 15% no-repeat #46B6AC;
-    background-size: cover;
+    background-size: contain;
+}
+
+div.demo-card-square.mdl-card.mdl-shadow--2dp.mt-4.ml-1.d-flex.justify-content-center div.mdl-card__actions.mdl-card--border a.mdl-button.mdl-button--colored.mdl-js-button.mdl-js-ripple-effect {
+    color: black;
 }
 
 input {

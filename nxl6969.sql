@@ -19,7 +19,10 @@ SET time_zone = "+00:00";
 --
 -- Database: `nxl6969`
 --
+DROP DATABASE IF EXISTS nxl6969;
+CREATE DATABASE nxl6969;
 
+USE nxl6969;
 -- --------------------------------------------------------
 
 --
@@ -37,22 +40,23 @@ CREATE TABLE `image` (
 --
 -- Table structure for table `location`
 --
-
 CREATE TABLE `location` (
   `location_id` int(11) NOT NULL,
   `name` varchar(255) DEFAULT NULL,
   `lat` varchar(255) DEFAULT NULL,
   `lng` varchar(255) DEFAULT NULL,
-  `description` text
+  `description` text,
+  `tags` varchar(50)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+SELECT * FROM location;
 --
 -- Dumping data for table `location`
 --
 
-INSERT INTO `location` (`location_id`, `name`, `lat`, `lng`, `description`) VALUES
-(1, 'Lovrijenac', '42.6409161', '18.103622', 'The monumental fortress, called the Gibraltar of Dubrovnik, rises 37 meters above sea level, and through its history has had many roles. The primary reason for its construction was a defensive nature, with main goal of protecting freedom of Dubrovnik'),
-(2, 'Boninovo', '42.6458845', '18.0966753', 'Boninovo is very beautiful lorem ipsum bepis bepis ');
+INSERT INTO `location` (`location_id`, `name`, `lat`, `lng`, `description`, `tags`) VALUES
+(1, 'Lovrijenac', '42.6409161', '18.103622', 'The monumental fortress, called the Gibraltar of Dubrovnik, rises 37 meters above sea level, and through its history has had many roles. The primary reason for its construction was a defensive nature, with main goal of protecting freedom of Dubrovnik', 'Historical fortress'),
+(2, 'Boninovo', '42.6458845', '18.0966753', 'Boninovo is very beautiful lorem ipsum bepis bepis', 'Beautiful Cliff');
 
 -- --------------------------------------------------------
 
