@@ -17,6 +17,7 @@ if (isset($_POST['token']) && isset($_FILES['file']) && isset($_POST['location']
     //$url = $_POST['url'];
     $url = $_FILES['file']['name'];
     $location = $_POST['location'];
+    $tags = $_POST['tags'];
     //var_dump($_POST['token']);
     if (strlen($_POST['token']) > 8) {
         //var_dump($_POST['token']);
@@ -31,11 +32,11 @@ if (isset($_POST['token']) && isset($_FILES['file']) && isset($_POST['location']
     }
 
 
-    $sql = "INSERT INTO image (user_id, image_path, location, uploaded) VALUES ((SELECT user_id FROM user WHERE
-            token = ?), ?, (SELECT location_id FROM location WHERE location.name = ?), NOW())";
+    $sql = "INSERT INTO image (user_id, image_path, location, uploaded, image_tags) VALUES ((SELECT user_id FROM user WHERE
+            token = ?), ?, (SELECT location_id FROM location WHERE location.name = ?), NOW(), ?)";
 
     if ($stmt = $mysqli->prepare($sql)) {
-        $stmt->bind_param('sss', $token, $url, $location);
+        $stmt->bind_param('ssss', $token, $url, $location, $tags);
 
         if ($stmt->execute()) {
             if (0 < $_FILES['file']['error']) {

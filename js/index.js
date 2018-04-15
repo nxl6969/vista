@@ -403,11 +403,12 @@ function createMap(latitude, longitude) {
  */
 $('#sendButton').on('click', function() {
 
-    //form_data.append("file", $('form')[0]);
+    let tags = prompt("Enter a few tags for your image (i.e. '#dubrovnik', separate multiple tags with whitespace).");
 
     var formData = new FormData($('form')[0]);
     formData.append('token', Cookies.get('token'));
     formData.append('location', currentLocation);
+    formData.append('tags', tags);
 
     $.ajax({
         url: 'datatest.php',
@@ -419,7 +420,6 @@ $('#sendButton').on('click', function() {
         xhr: function() {
             var myXhr = $.ajaxSettings.xhr();
             if (myXhr.upload) {
-                // For handling the progress of the upload
                 myXhr.upload.addEventListener('progress', function(e) {
                     if (e.lengthComputable) {
                         $('progress').attr({
@@ -435,6 +435,7 @@ $('#sendButton').on('click', function() {
 
             if( (response !== 'fail') || (response.length > 0) ){
                 Cookies.set('token', response, {expires: 365});
+                alert("Photo uploaded successfully.");
             }
 
         }
