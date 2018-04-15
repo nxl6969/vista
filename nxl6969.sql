@@ -62,7 +62,7 @@ SELECT * FROM location;
 INSERT INTO `location` (`location_id`, `name`, `lat`, `lng`, `description`, `tags`) VALUES
 (1, 'Lovrijenac', '42.641153', '18.104232', 'The monumental fortress, called the Gibraltar of Dubrovnik, rises 37 meters above sea level, and through its history has had many roles. The primary reason for its construction was a defensive nature, with main goal of protecting freedom of Dubrovnik.', 'Historical fortress'),
 (2, 'Boninovo', '42.6458845', '18.0966753', 'Boninovo is a humongous cliff, known for love locks. It offers a beautiful view of the sea and the horizon.', 'Beautiful Cliff'),
-(3, 'Pile Gate', '42.641482', '18.106054', 'The starting point of Vista application, offering beautiful view of the city walls.', 'City Walls');
+(3, 'Pile', '42.641482', '18.106054', 'The starting point of Vista application, offering beautiful view of the city walls.', 'City Walls');
 
 -- --------------------------------------------------------
 INSERT INTO nxl6969.image (user_id, image_path, location, uploaded, image_tags)

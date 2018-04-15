@@ -172,11 +172,11 @@ div.demo-card-square.mdl-card.mdl-shadow--2dp.mt-4.ml-1.d-flex.justify-content-c
     min-height: 250px;
 }
 
-#dir-title {
+#dir-title, #quote {
     color: white;
 }
 
-#directions-title {
+#directions-title, #quote-div, #steps-div {
     border-bottom: 1px solid white;
 }
 
@@ -184,9 +184,14 @@ div.demo-card-square.mdl-card.mdl-shadow--2dp.mt-4.ml-1.d-flex.justify-content-c
     background-color: #993333;
 }
 
-/* .show {
-    border: 1px solid red;
-}  */
+#file-upload-icon {
+    font-size: 20px;
+}
+
+.step-num {
+    font-size: 16px;
+    font-weight: 600;
+}
 
 div {
     box-sizing: border-box;

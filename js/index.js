@@ -68,6 +68,7 @@ function getAllSpots() {
         dataType: "JSON",
         success: function(response) {
             let data = '';
+            console.log(response);
 
             for(let i = 0; i < response.length; i++) {
                 let id = response[i][0].toLowerCase() + '-image';
@@ -147,6 +148,7 @@ function drawRoute(latitude,longitude, newLat, newLng) {
     });
 
     $('#directions').show().fadeIn(1000);
+    $('#directions-content').empty();
 
     let directionsService = new google.maps.DirectionsService();
     let directionsDisplay = new google.maps.DirectionsRenderer({
@@ -160,16 +162,66 @@ function drawRoute(latitude,longitude, newLat, newLng) {
             travelMode: google.maps.TravelMode.WALKING
         },
         function(response, status){
-            console.log(status);
             console.log(response);
             if(status == 'OK') {
+                console.log(response);
                 directionsDisplay.setDirections(response);
+                
+                let data = '';
+                let pdfData = '';
+                let counter = 1;
+                var pdf = new jsPDF({
+                    orientation: 'portrait',
+                    units: 'cm',
+                    format: [500, 500]
+                });
+
+                let steps = response.routes[0].legs[0].steps;
+
+                for(let i = 0; i < steps.length; i++) {
+                    
+                    data += '<div class="d-flex flex-row mb-3">' +
+                                '<div class="col-12">' +
+                                    '<div class="steps-div">' + 
+                                        '<span class="step-num mr-2">Step#' + counter + '</span><br>' + 
+                                        '<span class="steps-text">In ' + steps[i].distance.text + ' ' + steps[i].instructions + '</span>' + 
+                                    '</div>' +
+                                '</div>' +
+                            '</div>';
+                    pdfData += 'Step#' + counter + ') In' + $(steps[i].distance.text).find('<b>').replace('') + ' ' + steps[i].instructions; 
+                    counter++;
+                }
+
+                let btn = '<input id="pdf-btn" type="button" value="Download Steps"/>';
+                $('#directions-content').append(data);
+                $('#directions-content').append(btn);
+
+                pdf.text(pdfData, 5, 5);
+
+                $('#pdf-btn').on('click', function() {
+                    pdf.save('steps_description.pdf');
+                });
             }
             else {
                 console.log('Unable to find route');
-        }
+            }
     });
 }//end of drawRoute()
+
+function createPDF(data) {
+    console.log(data);
+    var document = new jsPDF({
+        orientation: 'portrait',
+        unit: 'in',
+        format: [3, 5]
+    });
+    document.text(data);
+    $('#pdf-btn').on('click', function(){
+        document.save('steps.pdf');
+        //document.output()
+    });
+
+}
 
 function getLoc(locName) {
 
@@ -297,7 +349,7 @@ function createMap(latitude, longitude) {
 
 }//end of createMap()
 
-$(':button').on('click', function() {
+$('#sendButton').on('click', function() {
 
     //form_data.append("file", $('form')[0]);
 
@@ -337,7 +389,7 @@ $(':button').on('click', function() {
         },
         success: function(response){
             console.log(response);
-            if(response !== 'fail'){
+            if( (response !== 'fail') || (response.length > 0) ){
                 Cookies.set('token', response, {expires: 365});
             }
 

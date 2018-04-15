@@ -9,10 +9,14 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="assets/css/style.css">
 
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.5/jspdf.debug.js" integrity="sha384-CchuzHs077vGtfhGYl9Qtc7Vx64rXBXdIAZIPbItbNyWIRTdG0oYAqki3Ry13Yzu" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script defer src="https://use.fontawesome.com/releases/v5.0.10/js/all.js" integrity="sha384-slN8GvtUJGnv6ca26v8EzVaR9DC58QEwsIk9q1QXdCU8Yu8ck/tL/5szYlBbqmS+" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.indigo-pink.min.css">
     <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Bad+Script" rel="stylesheet">    
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
     <link rel="icon" href="logo.svg">
 
@@ -31,30 +35,34 @@
                 </div>
             </div>
             <div id="cont-btn" class="container-fluid d-flex flex-row">
-                <div class="col-3 show"></div>
-                <div class="col-6 show">
+                <div class="col-3"></div>
+                <div class="col-6">
                     <a href="#content">
                         <input type="button" class="btn btn-primary w-100" value="Start">
                     </a>
                 </div>
-                <div class="col-3 show"></div>
+                <div class="col-3"></div>
             </div>
         </div>
 
         <div id="content">
-            <div class="container-fluid show">
-                <div class="d-flex flex-row">
-                    <div class="col-12">  
+            <div class="container-fluid">
+                <div class="d-flex flex-row pt-4 mb-2">
+                    <div class="col-12">
+                        <span>Upload your own...</span>  
                         <form enctype="multipart/form-data">
-                            <input id='imageFile' name="file" type="file" />
-                            <input id='sendButton' type="button" value="Upload" />
+                            <label for="imageFile">
+                                <i id="file-upload-icon" class="fas fa-upload"></i>
+                            </label>
+                            <input id='imageFile' name="file" type="file" accept="image/*" style="display:none;"/>
+                            <input id='sendButton' type="button" value="Upload"/>
                         </form>
                     </div>
                 </div>
-                <div class="d-flex flex-row show">
-                    <div id="quote" class="col-12 mt-4 text-center">Vista Locations</div>
+                <div id="quote-div" class="d-flex flex-row">
+                    <div id="quote" class="col-12 mt-4 mb-3">Vista Locations</div>
                 </div>
-                <div id="cards" class="d-flex flex-column show mt-1 align-items-center">   
+                <div id="cards" class="d-flex flex-column mt-1 align-items-center">   
                 </div>
                 <br>
             </div>
@@ -63,13 +71,14 @@
     <div id="directions" class="m-0 p-0" style="display: none;">
         <div class="container-fluid pt-4">
             <div class="d-flex flex-row">
-                <div id="directions-title" class="col-12">
+                <div id="directions-title" class="col-12 pb-3">
                     <span id="dir-title" class="other-pics-title">Directions</span>
                 </div>
             </div>
         </div>
         <div class="container mt-3 pb-5">
             <div id="map-directions"></div>
+            <div id="directions-content" class="container-fluid mt-4"></div>
         </div>
     </div>
     <div class="spinner">
