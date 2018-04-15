@@ -15,6 +15,7 @@
     <script defer src="https://use.fontawesome.com/releases/v5.0.10/js/all.js" integrity="sha384-slN8GvtUJGnv6ca26v8EzVaR9DC58QEwsIk9q1QXdCU8Yu8ck/tL/5szYlBbqmS+" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <link href="https://fonts.googleapis.com/css?family=Tangerine" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Roboto+Condensed" rel="stylesheet">
     <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.indigo-pink.min.css">
     <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Bad+Script" rel="stylesheet">    
@@ -32,7 +33,7 @@
             <div class="mdl-grid">
                 <div id="welcome-msg" class="d-flex flex-column text-center">
                     <p id="welcome-title" class="display-2">Vista</p>
-                    <span id="insp-msg" class="text-muted">Inspirational Quotes 101</span>
+                    <span id="insp-msg" class="text-muted">Discover Hidden Gems of Dubrovnik</span>
                 </div>
             </div>
             <div id="cont-btn" class="container-fluid d-flex flex-row">
@@ -54,18 +55,32 @@
             <div class="container-fluid">
                 <div class="d-flex flex-row pt-4 mb-2">
                     <div class="col-12">
-                        <span>PLACEHOLDER</span>  
-                        <form enctype="multipart/form-data">
-                            <label for="imageFile">
-                                <i id="file-upload-icon" class="fas fa-upload"></i>
-                            </label>
-                            <input id='imageFile' name="file" type="file" accept="image/*" style="display:none;"/>
-                            <input id='sendButton' type="button" value="Upload"/>
-                        </form>
+                        <h5>Become a Part Of The Story</h5>
+                        <span class="upload-quote">Upload or take an image.<br>Share your memories with others.</span>  
                     </div>
                 </div>
+                <div class="d-flex flex-row pt-4 mb-2">
+                    <div class="col-6">
+                        <form enctype="multipart/form-data">
+                        <label for="imageFile">
+                            <div id="browse">Browse</div>    
+                        </label>
+                        <input id='imageFile' name="file" type="file" accept="image/*" style="display:none;"/>
+                    </div>
+                    <div class="col-6 d-flex justify-content-center align-content-center">
+                        <label for="sendButton">
+                            <div id="upload-icon-div">
+                                <i id="file-upload-icon" class="fas fa-upload mr-4 "></i>
+                            </div>
+                         </label>
+                        <input id='sendButton' class="ml-5" type="button" value="Upload" style="display:none;"/>
+                        </form> 
+                    </div>                       
+                </div>
+            </div>
+            
                 <div id="quote-div" class="d-flex flex-row">
-                    <div id="quote" class="col-12 mt-4 mb-3">Vista Locations</div>
+                    <div id="quote" class="col-12 mt-4 mb-3 ml-3">Vista Locations</div>
                 </div>
                 <div id="cards" class="d-flex flex-column mt-1 align-items-center">   
                 </div>
@@ -83,7 +98,7 @@
         </div>
         <div class="container mt-3 pb-5">
             <div id="map-directions"></div>
-            <div id="directions-content" class="container-fluid mt-4"></div>
+            <div id="directions-content" class="container-fluid mt-4 p-0"></div>
         </div>
     </div>
     <div class="spinner">

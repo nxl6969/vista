@@ -52,10 +52,8 @@ function createToken() {
 
     if(Cookies.get('token') == null) {
         Cookies.set('token', token, { expires: 365 });
-        //setCookie('token', token, 31);
     }
 
-    //console.log("Token: " + Cookies.get('token'));
 }
 
 /**
@@ -135,7 +133,7 @@ function getDirections(latitude, longitude) {
     },
     { enableHighAccuracy: true });
 
-    drawRoute(parseFloat(latitude.split(',')[0]), parseFloat(latitude.split(',')[1]), Cookies.get('currLat'), Cookies.get('currLng'));
+    drawRoute(parseFloat(latitude.split(',')[0]), parseFloat(latitude.split(',')[1]));
 
 }//end of getDirections()
 
@@ -146,9 +144,9 @@ function getDirections(latitude, longitude) {
  * @param {*} newLat 
  * @param {*} newLng 
  */
-function drawRoute(latitude,longitude, newLat, newLng) {    
+function drawRoute(latitude,longitude, newLat = 42.6599715, newLng = 18.0579201) {    
 
-    let ori = new google.maps.LatLng(newLat, newLng);
+    let ori = new google.maps.LatLng(newLat, newLng); //RIP
     let dest= new google.maps.LatLng(latitude, longitude);
 
     var map = new google.maps.Map(document.getElementById('map-directions'), 
@@ -178,9 +176,8 @@ function drawRoute(latitude,longitude, newLat, newLng) {
             travelMode: google.maps.TravelMode.WALKING
         },
         function(response, status){
-            console.log(response);
             if(status == 'OK') {
-                console.log(response);
+
                 directionsDisplay.setDirections(response);
                 
                 let data = '';
@@ -197,28 +194,18 @@ function drawRoute(latitude,longitude, newLat, newLng) {
                 for(let i = 0; i < steps.length; i++) {
                     
                     let step = steps[i].instructions;
-                    /* step = step.replace(/.*_/g,"<b>"); */
-
-                    /* while(step.indexOf('<b>') > -1) {
-                        step = step.replace('<b>', '');
-                        step = step.replace('</b>', '');
-                        if(step.indexOf('<div style="font-size:0.9em">' > -1)) {
-                            step = step.replace('<div style="font-size:0.9em">', '\n');
-                        }
-                        if(step.indexOf('</div>') > -1) {
-                            step = step.replace('</div>', '');
-                        }
-                        if(step.indexOf('č') > -1)
-                    } */
+                 
                     let keys =  ['<b>', '</b>', '<div style="font-size:0.9em">', '</div>', 'š', 'č', 'ć', 'đ', 'ž'];
                     let values = ['', '', '\n', '', 's', 'c', 'c', 'd', 'z'];
                     step = encode(step, keys, values);
+                    let distance = steps[i].distance.value;
+                    distance < 1000 ? distance = steps[i].distance.value  + ' m' : distance = steps[i].distance.text; 
 
                     data += '<div class="d-flex flex-row mb-3">' +
-                                '<div class="col-12">' +
+                                '<div class="col-12 p-2 ">' +
                                     '<div class="steps-div">' + 
                                         '<span class="step-num mr-2">Step ' + counter + '</span><br>' + 
-                                        '<span class="steps-text">In ' + steps[i].distance.text + ' ' + step + '</span>' + 
+                                        '<span class="steps-text">In ' + distance  + ' ' + step + '</span>' + 
                                     '</div>' +
                                 '</div>' +
                             '</div>';
@@ -230,7 +217,7 @@ function drawRoute(latitude,longitude, newLat, newLng) {
 
                 let btn = '<div class="d-flex flex-row mt-4 mb-2">' +
                                 '<div class="d-flex align-items-center align-content-center justify-content-center col-12">' +
-                                    '<input id="pdf-btn" type="button" value="Download Steps"/>' +
+                                    '<input id="pdf-btn" type="button" value="Download PDF"/>' +
                                 '</div>' +
                            '</div>';
                 $('#directions-content').append(data);
@@ -314,7 +301,7 @@ function getLoc(locName) {
                 data = '<div id="location-title">' +
                             '<div class="d-flex col-12 pt-1">' +
                                 '<span class="location-title pl-3">' + locName + '</span>' +
-                                '<span id="back-btn" class="pt-2" onclick="back()">Back</span>' +
+                                '<span id="back-btn" onclick="back()">Back</span>' +
                             '</div>' +
                         '</div>' +
                         '<div class="d-flex flex-row">' + 
@@ -326,7 +313,7 @@ function getLoc(locName) {
                 data = '<div id="location-title">' +
                             '<div class="d-flex col-12 pt-1">' +
                                 '<span class="location-title pl-3">' + locName + '</span>' +
-                                '<span id="back-btn" class="pt-2" onclick="back()">Back</span>' +
+                                '<span id="back-btn" onclick="back()">Back</span>' +
                             '</div>' +
                         '</div>' +
                         '<div id="location-content" class="container-fluid d-flex align-items-center mt-3">' + 
@@ -341,7 +328,7 @@ function getLoc(locName) {
                                         '<span class="description">' + response[0][3] + '</span>' +
                                     '</div>' +
                                 '</div>' +
-                                '<div class="d-flex flex-row mt-2">' +
+                                '<div class="d-flex flex-row mt-4">' +
                                     '<div id="loc-location" class="col-12 pb-2">' +
                                         '<span class="description-title">Location</span><br>' +
                                     '</div>' +
@@ -353,15 +340,15 @@ function getLoc(locName) {
                                 '</div>' +
                             '</div>' + 
                         '</div>' + 
-                        '<div class="container-fluid mt-3">' +
-                            '<div id="previous-pics" class="pb-2 mb-3">' +
+                        '<div class="container-fluid mt-4 pt-1">' +
+                            '<div id="previous-pics" class="pb-2 mb-3 mt-2 ml-3">' +
                                 '<span class="description-title">Previous pictures</span>' +
                             '</div>' + 
                         '</div>';
                 var id;
                 for(let i = 0; i < response.length; i++) {
                     let path = 'images/' + response[i][0];
-                    data += '<div class="container-fluid d-flex mt-1 mb-3">' +
+                    data += '<div class="container-fluid d-flex mt-1 mb-4">' +
                                 '<div class="container-fluid d-flex flex-row">' + 
                                     '<div class="demo-card-square mdl-card mdl-shadow--2dp">'+
                                         '<div class="mdl-card__title mdl-card--expand bg-cover" style="background-image:url(' + path + ')">' +
@@ -400,12 +387,8 @@ function createMap(latitude, longitude) {
     let map = new google.maps.Map(document.getElementById('map'), {
         zoom: 15,
         center: coords,
-        zoomControl: false,
-        mapTypeControl: false,
         scaleControl: false,
         streetViewControl: false,
-        rotateControl: false,
-        fullscreenControl: false
     });
 
     let marker = new google.maps.Marker({
@@ -449,7 +432,7 @@ $('#sendButton').on('click', function() {
             return myXhr;
         },
         success: function(response){
-            console.log(response);
+
             if( (response !== 'fail') || (response.length > 0) ){
                 Cookies.set('token', response, {expires: 365});
             }
