@@ -6,6 +6,8 @@ $(document).on('click', 'a[href^="#"]', function (event) {
     }, 500);
 });
 
+var currentLocation = 'Lovrijenac';
+
 
 /** 
  * Sends token to the server side script
@@ -13,6 +15,7 @@ $(document).on('click', 'a[href^="#"]', function (event) {
 */
 $(document).ready(function(){
     getAllSpots();
+    createToken();
 });
 
 function unsetCookie(name) {
@@ -31,12 +34,12 @@ function setCookie(name, value, expiration = null) {
 function createToken() {
     let token = Math.random().toString(36).substr(2,8);
 
-    if(Cookies.get('token') === null) {
-        Cookies.set('token', token, { expires: 31 });
-        setCookie('token', token, 31);
+    if(Cookies.get('token') == null) {
+        Cookies.set('token', token, { expires: 365 });
+        //setCookie('token', token, 31);
     }
 
-    console.log("Token: " + Cookies.get('token'));
+    //console.log("Token: " + Cookies.get('token'));
 }
 
 /**
@@ -229,3 +232,57 @@ function createMap(latitude, longitude) {
 function upload(event) {
     let input = event.target.files;
 }
+
+$(':button').on('click', function() {
+
+    //form_data.append("file", $('form')[0]);
+
+    var formData = new FormData($('form')[0]);
+    formData.append('token', Cookies.get('token'));
+    formData.append('location', currentLocation);
+
+    $.ajax({
+        // Your server script to process the upload
+        url: 'datatest.php',
+        type: 'POST',
+
+        // Form data
+        data: formData,
+
+        // Tell jQuery not to process data or worry about content-type
+        // You *must* include these options!
+        cache: false,
+        contentType: false,
+        processData: false,
+
+        // Custom XMLHttpRequest
+        xhr: function() {
+            var myXhr = $.ajaxSettings.xhr();
+            if (myXhr.upload) {
+                // For handling the progress of the upload
+                myXhr.upload.addEventListener('progress', function(e) {
+                    if (e.lengthComputable) {
+                        $('progress').attr({
+                            value: e.loaded,
+                            max: e.total,
+                        });
+                    }
+                } , false);
+            }
+            return myXhr;
+        },
+        success: function(response){
+            console.log(response);
+            if(response !== 'fail'){
+                Cookies.set('token', response, {expires: 365});
+            }
+
+        }
+
+
+    });
+});
+/*
+$('#sendButton').click(function(){
+
+});*/
