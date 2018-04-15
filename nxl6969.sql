@@ -60,15 +60,22 @@ SELECT * FROM location;
 --
 
 INSERT INTO `location` (`location_id`, `name`, `lat`, `lng`, `description`, `tags`) VALUES
-(1, 'Lovrijenac', '42.640994', '18.1035427', 'The monumental fortress, called the Gibraltar of Dubrovnik, rises 37 meters above sea level, and through its history has had many roles. The primary reason for its construction was a defensive nature, with main goal of protecting freedom of Dubrovnik', 'Historical fortress'),
-(2, 'Boninovo', '42.6458845', '18.0966753', 'Boninovo is very beautiful lorem ipsum bepis bepis', 'Beautiful Cliff');
+(1, 'Lovrijenac', '42.641153', '18.104232', 'The monumental fortress, called the Gibraltar of Dubrovnik, rises 37 meters above sea level, and through its history has had many roles. The primary reason for its construction was a defensive nature, with main goal of protecting freedom of Dubrovnik.', 'Historical fortress'),
+(2, 'Boninovo', '42.6458845', '18.0966753', 'Boninovo is a humongous cliff, known for love locks. It offers a beautiful view of the sea and the horizon.', 'Beautiful Cliff'),
+(3, 'Pile Gate', '42.641482', '18.106054', 'The starting point of Vista application, offering beautiful view of the city walls.', 'City Walls');
 
 -- --------------------------------------------------------
-INSERT INTO nxl6969.image (user_id, image_path, location, uploaded, image_tags) VALUES (3, 'lovrijenac.jpg', 1, '2017-09-15', '#lovrijenac #pretty #dubrovnik #vista');
-INSERT INTO nxl6969.image (user_id, image_path, location, uploaded, image_tags) VALUES (3, 'boninovo.jpg', 1, '2018-02-16', '#boninovo #dubrovnik #vista');
+INSERT INTO nxl6969.image (user_id, image_path, location, uploaded, image_tags)
+VALUES 
+(3, 'lovrijenac.jpg', 1, '2017-09-15', '#lovrijenac #pretty #dubrovnik #vista'),
+(3, 'boninovo.jpg', 2, '2018-02-16', '#boninovo #dubrovnik #vista'),
+(3, 'lovrijenac2.jpg', 1, '2017-05-12', '#lovrijenac #view #sea #vista #beautiful'),
+(3, 'lovrijenac3.jpg', 1, '2016-09-22', '#dubrovnik #lovrijenac #vista #happy'),
+(3, 'lovrijenac4.jpg', 1, '2016-10-19', '#lovrijenac #pretty #view #amazing'),
+(3, 'pile.jpg', 3, '2015-08-22', '#pile #gate #summer #hot #ree'),
+(3, 'pile2.jpg', 3, '2018-04-26', '#pile #restaurant #expensive #butworth');
 
-INSERT INTO nxl6969.image (user_id, image_path, location, uploaded, image_tags) VALUES (3, 'boninovo.jpg', 2, '2018-04-30', '#boninovo #dubrovnik #vista');
-INSERT INTO nxl6969.image (user_id, image_path, location, uploaded, image_tags) VALUES (3, 'boninovo.jpg', 2, '2017-05-18', '#boninovo #dubrovnik #vista');
+
 --
 -- Table structure for table `user`
 --
