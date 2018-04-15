@@ -49,15 +49,6 @@ function back() {
     location.reload();
 }
 
-/* function sendToken() {
-    $.ajax({
-        url: 'datatest.php',
-        dataType: 'JSON',
-        data: 'token',
-
-    });
-} */
-
 /**
  * Retrieves all locations that have the device 
  */
@@ -90,6 +81,8 @@ function getAllSpots() {
                             '<div class="mdl-card__actions mdl-card--border">' +
                                 '<a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" onclick="getLoc(\'' + response[i][0] + '\')">View More' +
                                 '</a>' +
+                                '<a href="#directions" class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect ml-5" onclick="getDirections(\'' + response[i][1] + ',' + response[i][2] + '\')">See Directions' + 
+                                '</a>' + 
                             '</div>' +
                         '</div>';
                 
@@ -104,7 +97,82 @@ function getAllSpots() {
 
 }//end of getAllSpots()
 
+/**
+ * 
+ * @param {*} latitude 
+ * @param {*} longitude 
+ */
+function getDirections(latitude, longitude) {
+   
+    var currLat;
+    var currLng;
+
+    navigator.geolocation.getCurrentPosition(function(position){
+        currLat = parseFloat(position.coords.latitude);
+        currLng = parseFloat(position.coords.longitude);
+        Cookies.set('currLat', currLat);
+        Cookies.set('currLng', currLng); 
+    },
+    function(msg){
+        console.log("Error: " + msg);
+    },
+    { enableHighAccuracy: true });
+
+    drawRoute(parseFloat(latitude.split(',')[0]), parseFloat(latitude.split(',')[1]), Cookies.get('currLat'), Cookies.get('currLng'));
+
+}//end of getDirections()
+
+/**
+ * 
+ * @param {*} latitude 
+ * @param {*} longitude 
+ * @param {*} newLat 
+ * @param {*} newLng 
+ */
+function drawRoute(latitude,longitude, newLat, newLng) {    
+
+    let ori = new google.maps.LatLng(newLat, newLng);
+    let dest= new google.maps.LatLng(latitude, longitude);
+
+    var map = new google.maps.Map(document.getElementById('map-directions'), 
+    {
+        zoom: 14,
+        center: ori,
+        zoomControl: false,
+        mapTypeControl: false,
+        scaleControl: false,
+        streetViewControl: false,
+        rotateControl: false,
+        fullscreenControl: false 
+    });
+
+    $('#directions').show().fadeIn(1000);
+
+    let directionsService = new google.maps.DirectionsService();
+    let directionsDisplay = new google.maps.DirectionsRenderer({
+        map: map
+    });
+
+    directionsService.route(
+        { 
+            origin: ori, 
+            destination: dest, 
+            travelMode: google.maps.TravelMode.WALKING
+        },
+        function(response, status){
+            console.log(status);
+            console.log(response);
+            if(status == 'OK') {
+                directionsDisplay.setDirections(response);
+            }
+            else {
+                console.log('Unable to find route');
+        }
+    });
+}//end of drawRoute()
+
 function getLoc(locName) {
+
     $.ajax({
         method: "POST",
         url: 'datatest.php',
@@ -229,10 +297,6 @@ function createMap(latitude, longitude) {
 
 }//end of createMap()
 
-function upload(event) {
-    let input = event.target.files;
-}
-
 $(':button').on('click', function() {
 
     //form_data.append("file", $('form')[0]);
@@ -282,7 +346,3 @@ $(':button').on('click', function() {
 
     });
 });
-/*
-$('#sendButton').click(function(){
-
-});*/
