@@ -43,6 +43,14 @@
 
         <div id="content">
             <div class="container-fluid show">
+                <div class="d-flex flex-row">
+                    <div class="col-12">  
+                        <form enctype="multipart/form-data">
+                            <input id='imageFile' name="file" type="file" />
+                            <input id='sendButton' type="button" value="Upload" />
+                        </form>
+                    </div>
+                </div>
                 <div class="d-flex flex-row show">
                     <div id="quote" class="col-12 mt-4 text-center">Vista Locations</div>
                 </div>
@@ -65,8 +73,7 @@
         </div>
     </div>
     <div class="spinner">
-        </div>
-
+    </div>
 
     <script src="https://cdn.jsdelivr.net/npm/js-cookie@2/src/js.cookie.min.js"></script>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBbGpevzk5Ip5vozwZk2PWNJLjT-ePmsCo"></script>
