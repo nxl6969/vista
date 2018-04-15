@@ -70,7 +70,7 @@ body {
 }
 
 #quote {
-    font-size: 1.5em;
+    font-size: 2.2em;
 }
 
 .demo-card-square.mdl-card {
@@ -166,6 +166,22 @@ div.demo-card-square.mdl-card.mdl-shadow--2dp.mt-4.ml-1.d-flex.justify-content-c
 .error-msg {
     color:red;
     font-size: 16px;
+}
+
+#map-directions {
+    min-height: 250px;
+}
+
+#dir-title {
+    color: white;
+}
+
+#directions-title {
+    border-bottom: 1px solid white;
+}
+
+#directions {
+    background-color: #993333;
 }
 
 /* .show {
