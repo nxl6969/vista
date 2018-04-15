@@ -14,6 +14,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <script defer src="https://use.fontawesome.com/releases/v5.0.10/js/all.js" integrity="sha384-slN8GvtUJGnv6ca26v8EzVaR9DC58QEwsIk9q1QXdCU8Yu8ck/tL/5szYlBbqmS+" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link href="https://fonts.googleapis.com/css?family=Tangerine" rel="stylesheet">
     <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.indigo-pink.min.css">
     <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Bad+Script" rel="stylesheet">    
@@ -36,20 +37,24 @@
             </div>
             <div id="cont-btn" class="container-fluid d-flex flex-row">
                 <div class="col-3"></div>
-                <div class="col-6">
-                    <a href="#content">
-                        <input type="button" class="btn btn-primary w-100" value="Start">
+                <div class="col-6 d-flex justify-content-center align-items-center">
+                    <a id="start-link" href="#content">
+                        <span>Start</span><br>
+                        <i style="font-size:35px;" class="fas fa-angle-double-down mt-2"></i>
                     </a>
                 </div>
                 <div class="col-3"></div>
             </div>
         </div>
-
+        <a id="link-to-top" href="#top"><div id="bk-to-top" style="display:none;">
+            <i style="font-size:24px; color:white;" class="fas fa-angle-double-up"></i>
+        </div>
+        </a>
         <div id="content">
             <div class="container-fluid">
                 <div class="d-flex flex-row pt-4 mb-2">
                     <div class="col-12">
-                        <span>Upload your own...</span>  
+                        <span>PLACEHOLDER</span>  
                         <form enctype="multipart/form-data">
                             <label for="imageFile">
                                 <i id="file-upload-icon" class="fas fa-upload"></i>

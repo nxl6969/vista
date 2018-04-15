@@ -31,8 +31,8 @@ if (isset($_POST['token']) && isset($_FILES['file']) && isset($_POST['location']
     }
 
 
-    $sql = "INSERT INTO image (user_id, image_path, location) VALUES ((SELECT user_id FROM user WHERE
-            token = ?), ?, (SELECT location_id FROM location WHERE location.name = ?))";
+    $sql = "INSERT INTO image (user_id, image_path, location, uploaded) VALUES ((SELECT user_id FROM user WHERE
+            token = ?), ?, (SELECT location_id FROM location WHERE location.name = ?), NOW())";
 
     if ($stmt = $mysqli->prepare($sql)) {
         $stmt->bind_param('sss', $token, $url, $location);

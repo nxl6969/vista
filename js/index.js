@@ -1,3 +1,4 @@
+//smooth scroll
 $(document).on('click', 'a[href^="#"]', function (event) {
     event.preventDefault();
 
@@ -18,19 +19,34 @@ $(document).ready(function(){
     createToken();
 });
 
+/**
+ * Unsets Cookie
+ * @param {} name Cookie name 
+ */
 function unsetCookie(name) {
     Cookies.remove(name);
 }//end of unsetCookie()
 
+/**
+ * Sets cookie with expiration date
+ * @param {*} name Cookie name
+ * @param {*} value Cookie value
+ * @param {*} expiration Cookie expiration date
+ */
 function setCookie(name, value, expiration = null) {
+
     if(expiration != null) {
         Cookies.set(name, value, { expires: expiration });
     }
     else { 
         Cookies.set(name, value);
     }
+
 }//end of setCookie()
 
+/**
+ * Creates user token which is a random 8 character alphanumeric string
+ */
 function createToken() {
     let token = Math.random().toString(36).substr(2,8);
 
@@ -168,61 +184,111 @@ function drawRoute(latitude,longitude, newLat, newLng) {
                 directionsDisplay.setDirections(response);
                 
                 let data = '';
-                let pdfData = '';
                 let counter = 1;
                 var pdf = new jsPDF({
                     orientation: 'portrait',
                     units: 'cm',
-                    format: [500, 500]
+                    format: [150, 200]
                 });
 
                 let steps = response.routes[0].legs[0].steps;
+                let pdfData = '\nDirections\n\n';
 
                 for(let i = 0; i < steps.length; i++) {
                     
+                    let step = steps[i].instructions;
+                    /* step = step.replace(/.*_/g,"<b>"); */
+
+                    /* while(step.indexOf('<b>') > -1) {
+                        step = step.replace('<b>', '');
+                        step = step.replace('</b>', '');
+                        if(step.indexOf('<div style="font-size:0.9em">' > -1)) {
+                            step = step.replace('<div style="font-size:0.9em">', '\n');
+                        }
+                        if(step.indexOf('</div>') > -1) {
+                            step = step.replace('</div>', '');
+                        }
+                        if(step.indexOf('č') > -1)
+                    } */
+                    let keys =  ['<b>', '</b>', '<div style="font-size:0.9em">', '</div>', 'š', 'č', 'ć', 'đ', 'ž'];
+                    let values = ['', '', '\n', '', 's', 'c', 'c', 'd', 'z'];
+                    step = encode(step, keys, values);
+
                     data += '<div class="d-flex flex-row mb-3">' +
                                 '<div class="col-12">' +
                                     '<div class="steps-div">' + 
-                                        '<span class="step-num mr-2">Step#' + counter + '</span><br>' + 
-                                        '<span class="steps-text">In ' + steps[i].distance.text + ' ' + steps[i].instructions + '</span>' + 
+                                        '<span class="step-num mr-2">Step ' + counter + '</span><br>' + 
+                                        '<span class="steps-text">In ' + steps[i].distance.text + ' ' + step + '</span>' + 
                                     '</div>' +
                                 '</div>' +
                             '</div>';
-                    pdfData += 'Step#' + counter + ') In' + $(steps[i].distance.text).find('<b>').replace('') + ' ' + steps[i].instructions; 
+                    
+        
+                    pdfData += 'Step ' + counter + ' - In ' + steps[i].distance.text + ' ' + step + '\n\n'; 
                     counter++;
                 }
 
-                let btn = '<input id="pdf-btn" type="button" value="Download Steps"/>';
+                let btn = '<div class="d-flex flex-row mt-4 mb-2">' +
+                                '<div class="d-flex align-items-center align-content-center justify-content-center col-12">' +
+                                    '<input id="pdf-btn" type="button" value="Download Steps"/>' +
+                                '</div>' +
+                           '</div>';
                 $('#directions-content').append(data);
                 $('#directions-content').append(btn);
-
-                pdf.text(pdfData, 5, 5);
+                pdf.setFontSize(10);
+                pdf.text(10,10, pdfData);
+                
 
                 $('#pdf-btn').on('click', function() {
                     pdf.save('steps_description.pdf');
                 });
             }
             else {
-                console.log('Unable to find route');
+                console.log('Unable to find route.');
             }
     });
 }//end of drawRoute()
 
+/**
+ * Creates PDF and registers onclick event to download the pdf which includes steps to the location
+ * @param {*} data Data contained in the steps
+ */
 function createPDF(data) {
-    console.log(data);
+
     var document = new jsPDF({
         orientation: 'portrait',
         unit: 'in',
-        format: [3, 5]
+        format: [3, 4]
     });
     document.text(data);
+
     $('#pdf-btn').on('click', function(){
         document.save('steps.pdf');
-        //document.output()
     });
 
-}
+}//end of createPDF()
 
+/**
+ * Encodes unwanted characters for the pdf file instructions
+ * @param {} data 
+ * @param {*} keys 
+ * @param {*} values 
+ */
+function encode(data, keys = [], values = []) {
+
+    for(let i = 0; i < keys.length; i++) {
+        while(data.indexOf(keys[i]) > -1){
+           data = data.replace(keys[i], values[i]);
+        }
+    }
+    return data;
+
+}//end of encode
+
+/**
+ * Gets location information about a specific location
+ * @param {} locName Location Name
+ */
 function getLoc(locName) {
 
     $.ajax({
@@ -320,7 +386,6 @@ function getLoc(locName) {
 
         }//end of success function
     });
-
 }//end of getLoc()
 
 /**
@@ -329,6 +394,7 @@ function getLoc(locName) {
  * @param {*} longitude 
  */
 function createMap(latitude, longitude) {
+
     let coords = new google.maps.LatLng(latitude, longitude);
 
     let map = new google.maps.Map(document.getElementById('map'), {
@@ -349,6 +415,9 @@ function createMap(latitude, longitude) {
 
 }//end of createMap()
 
+/**
+ * Registering event listener to the upload button
+ */
 $('#sendButton').on('click', function() {
 
     //form_data.append("file", $('form')[0]);
@@ -358,20 +427,12 @@ $('#sendButton').on('click', function() {
     formData.append('location', currentLocation);
 
     $.ajax({
-        // Your server script to process the upload
         url: 'datatest.php',
         type: 'POST',
-
-        // Form data
         data: formData,
-
-        // Tell jQuery not to process data or worry about content-type
-        // You *must* include these options!
         cache: false,
         contentType: false,
         processData: false,
-
-        // Custom XMLHttpRequest
         xhr: function() {
             var myXhr = $.ajaxSettings.xhr();
             if (myXhr.upload) {
@@ -394,7 +455,15 @@ $('#sendButton').on('click', function() {
             }
 
         }
-
-
     });
+});
+
+$(document).scroll(function(){
+    $('#bk-to-topp').hide();
+    if($(window).scrollTop() > 640) {
+        $('#bk-to-top').show();
+    }
+    else {
+        $('#bk-to-top').hide();
+    }
 });
