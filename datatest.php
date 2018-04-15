@@ -46,6 +46,7 @@ if(isset($_POST['token']) && isset($_POST['url']) && isset($_POST['location'])){
 
 }
 
+
 if(isset($_POST['locations'])){
 
     $mysqli = db_connect();
@@ -80,7 +81,7 @@ if(isset($_POST['locName'])){
     $mysqli = db_connect();
     $locName = $_POST['locName'];
 
-    $sql = "SELECT image.image_path, location.lat, location.lng, location.description FROM image LEFT JOIN location ON image.location = location.location_id WHERE location.name = ?";
+    $sql = "SELECT image.image_path, location.lat, location.lng, location.description, image.uploaded, image.image_tags FROM image LEFT JOIN location ON image.location = location.location_id WHERE location.name = ?";
 
     if($stmt = $mysqli->prepare($sql)) {
 
@@ -90,11 +91,11 @@ if(isset($_POST['locName'])){
 
             $stmt->store_result();
 
-            $stmt->bind_result($path, $lat, $lng, $desc);
+            $stmt->bind_result($path, $lat, $lng, $desc, $uploaded, $tags);
             $result = [];
 
             while($stmt->fetch()){
-                array_push($result, array($path, $lat, $lng, $desc));
+                array_push($result, array($path, $lat, $lng, $desc, $uploaded, $tags));
             }
             echo json_encode($result);
         }

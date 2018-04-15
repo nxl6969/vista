@@ -70,7 +70,6 @@ body {
 }
 
 #quote {
-    font-family: 'Bad Script', cursive;
     font-size: 1.5em;
 }
 
@@ -80,7 +79,8 @@ body {
   }
 .demo-card-square > .mdl-card__title {
     color: #fff;
-    background-size: contain;
+    background-size: cover !important;
+    background-position: center !important;
 }
 
 div.demo-card-square.mdl-card.mdl-shadow--2dp.mt-4.ml-1.d-flex.justify-content-center div.mdl-card__actions.mdl-card--border a.mdl-button.mdl-button--colored.mdl-js-button.mdl-js-ripple-effect {
@@ -121,7 +121,7 @@ div.demo-card-square.mdl-card.mdl-shadow--2dp.mt-4.ml-1.d-flex.justify-content-c
     color: black;
 }
 
-#desc-title, #loc-location {
+#desc-title, #loc-location, #previous-pics {
     border-bottom: 1px solid #666;
 }
 
@@ -129,10 +129,48 @@ div.demo-card-square.mdl-card.mdl-shadow--2dp.mt-4.ml-1.d-flex.justify-content-c
     width: 100%;
     min-height: 200px;
 }
-/* 
-.show {
+
+#back-btn {
+    position: absolute;
+    left: 80%;
+    margin-top: 4px;
+}
+
+.location-images > img{
+    max-width: 280px;
+    max-height: 280px;
+    border-radius: 4px;
+}
+
+.other-pics-title {
+    font-size: 24px;
+    color: black;
+}
+
+.image-header {
+    color: #666;
+    font-size: 12px;
+}
+
+.image-tags {
+    color: #666;
+    font-size: 12px;
+}
+
+.bg-cover {
+    background-size: cover !important;
+    background-repeat: no-repeat;
+    background-position: center !important;
+}
+
+.error-msg {
+    color:red;
+    font-size: 16px;
+}
+
+/* .show {
     border: 1px solid red;
-} */
+}  */
 
 div {
     box-sizing: border-box;

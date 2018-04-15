@@ -32,7 +32,9 @@ USE nxl6969;
 CREATE TABLE `image` (
   `user_id` int(11) DEFAULT NULL,
   `image_path` varchar(255) DEFAULT NULL,
-  `location` int(11) DEFAULT NULL
+  `location` int(11) DEFAULT NULL,
+  `uploaded` date DEFAULT NULL,
+  `image_tags` varchar(255)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -49,9 +51,8 @@ CREATE TABLE `location` (
   `tags` varchar(50)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+SELECT * FROM image;
 SELECT * FROM location;
-
-DESCRIBE location;
 
 
 --
@@ -63,8 +64,11 @@ INSERT INTO `location` (`location_id`, `name`, `lat`, `lng`, `description`, `tag
 (2, 'Boninovo', '42.6458845', '18.0966753', 'Boninovo is very beautiful lorem ipsum bepis bepis', 'Beautiful Cliff');
 
 -- --------------------------------------------------------
-INSERT INTO nxl6969.image (user_id, image_path, location) VALUES (3, 'lovrijenac.jpg', 1);
-INSERT INTO nxl6969.image (user_id, image_path, location) VALUES (3, 'lovrijenac2.jpg', 1);
+INSERT INTO nxl6969.image (user_id, image_path, location, uploaded, image_tags) VALUES (3, 'lovrijenac.jpg', 1, '2017-09-15', '#lovrijenac #pretty #dubrovnik #vista');
+INSERT INTO nxl6969.image (user_id, image_path, location, uploaded, image_tags) VALUES (3, 'boninovo.jpg', 1, '2018-02-16', '#boninovo #dubrovnik #vista');
+
+INSERT INTO nxl6969.image (user_id, image_path, location, uploaded, image_tags) VALUES (3, 'boninovo.jpg', 2, '2018-04-30', '#boninovo #dubrovnik #vista');
+INSERT INTO nxl6969.image (user_id, image_path, location, uploaded, image_tags) VALUES (3, 'boninovo.jpg', 2, '2017-05-18', '#boninovo #dubrovnik #vista');
 --
 -- Table structure for table `user`
 --
