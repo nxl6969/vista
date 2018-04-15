@@ -198,6 +198,7 @@ function drawRoute(latitude,longitude, newLat = 42.6599715, newLng = 18.0579201)
                     let keys =  ['<b>', '</b>', '<div style="font-size:0.9em">', '</div>', 'š', 'č', 'ć', 'đ', 'ž'];
                     let values = ['', '', '\n', '', 's', 'c', 'c', 'd', 'z'];
                     step = encode(step, keys, values);
+
                     let distance = steps[i].distance.value;
                     distance < 1000 ? distance = steps[i].distance.value  + ' m' : distance = steps[i].distance.text; 
 
@@ -211,7 +212,7 @@ function drawRoute(latitude,longitude, newLat = 42.6599715, newLng = 18.0579201)
                             '</div>';
                     
         
-                    pdfData += 'Step ' + counter + ' - In ' + steps[i].distance.text + ' ' + step + '\n\n'; 
+                    pdfData += 'Step ' + counter + ' - In ' + distance+ ' ' + step + '\n\n'; 
                     counter++;
                 }
 
