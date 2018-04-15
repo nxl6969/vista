@@ -46,25 +46,31 @@
                 <div class="d-flex flex-row show">
                     <div id="quote" class="col-12 mt-4 text-center">Vista Locations</div>
                 </div>
-                <div id="cards" class="d-flex flex-column show mt-1 align-items-center">
+                <div id="cards" class="d-flex flex-column show mt-1 align-items-center">   
                 </div>
                 <br>
             </div>
         </div>
     </div>
-
-    <form enctype="multipart/form-data">
-        <input id='imageFile' name="file" type="file" />
-        <input id='sendButton' type="button" value="Upload" />
-    </form>
-
-    <div class="spinner">
+    <div id="directions" class="m-0 p-0" style="display: none;">
+        <div class="container-fluid pt-4">
+            <div class="d-flex flex-row">
+                <div id="directions-title" class="col-12">
+                    <span id="dir-title" class="other-pics-title">Directions</span>
+                </div>
+            </div>
+        </div>
+        <div class="container mt-3 pb-5">
+            <div id="map-directions"></div>
+        </div>
     </div>
+    <div class="spinner">
+        </div>
+
+
     <script src="https://cdn.jsdelivr.net/npm/js-cookie@2/src/js.cookie.min.js"></script>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBbGpevzk5Ip5vozwZk2PWNJLjT-ePmsCo"></script>
     <script src="js/index.js"></script>
-
-    <progress></progress>
 
 </body>
 </html>
